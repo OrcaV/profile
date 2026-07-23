@@ -1,0 +1,955 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Panatchai Vathanasri — mobile platform engineer. React Native & Android architecture, OTA, CDN, developer tooling. Ex-Crypto.com. Open to remote & relocation.">
+<meta property="og:title" content="Panatchai Vathanasri — Mobile Platform Engineering">
+<meta property="og:description" content="React Native & Android architecture, OTA, CDN, developer tooling. Ex-Crypto.com. Open to remote & relocation.">
+<meta property="og:type" content="website">
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body { margin: 0; }
+  img { max-width: 100%; }
+</style>
+<title>Panatchai Vathanasri — Mobile Platform Engineering</title>
+
+<style>
+  /* ── tokens ────────────────────────────────────────────────────────────── */
+  :root {
+    --ground:     #F5F7F9;
+    --surface:    #FFFFFF;
+    --surface-2:  #EEF1F5;
+    --ink:        #121821;
+    --ink-soft:   #4C5766;
+    --ink-faint:  #7A8494;
+    --line:       #DDE2E9;
+    --line-soft:  #E9ECF1;
+    --accent:     #B7791F;
+    --accent-ink: #8F5C12;
+    --accent-wash:#F2E7D0;
+    --signal:     #2F7D74;
+
+    --mono: ui-monospace, "SF Mono", "SFMono-Regular", Menlo, Consolas, "Liberation Mono", monospace;
+    --sans: "Avenir Next", "Avenir", "Segoe UI", system-ui, -apple-system, "Helvetica Neue", sans-serif;
+
+    --shell: 1120px;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --ground:     #0C1015;
+      --surface:    #131A22;
+      --surface-2:  #1A222C;
+      --ink:        #E7ECF3;
+      --ink-soft:   #9BA6B6;
+      --ink-faint:  #6E7A8B;
+      --line:       #232C38;
+      --line-soft:  #1C242E;
+      --accent:     #E0A83C;
+      --accent-ink: #EBBB5E;
+      --accent-wash:#2A2317;
+      --signal:     #55B7A8;
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --ground:     #0C1015;
+    --surface:    #131A22;
+    --surface-2:  #1A222C;
+    --ink:        #E7ECF3;
+    --ink-soft:   #9BA6B6;
+    --ink-faint:  #6E7A8B;
+    --line:       #232C38;
+    --line-soft:  #1C242E;
+    --accent:     #E0A83C;
+    --accent-ink: #EBBB5E;
+    --accent-wash:#2A2317;
+    --signal:     #55B7A8;
+  }
+
+  :root[data-theme="light"] {
+    --ground:     #F5F7F9;
+    --surface:    #FFFFFF;
+    --surface-2:  #EEF1F5;
+    --ink:        #121821;
+    --ink-soft:   #4C5766;
+    --ink-faint:  #7A8494;
+    --line:       #DDE2E9;
+    --line-soft:  #E9ECF1;
+    --accent:     #B7791F;
+    --accent-ink: #8F5C12;
+    --accent-wash:#F2E7D0;
+    --signal:     #2F7D74;
+  }
+
+  /* ── base ──────────────────────────────────────────────────────────────── */
+  body {
+    background: var(--ground);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  a { color: inherit; }
+
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  .shell {
+    max-width: var(--shell);
+    margin: 0 auto;
+    padding: 0 28px;
+  }
+
+  /* ── masthead ──────────────────────────────────────────────────────────── */
+  .masthead {
+    position: relative;
+    border-bottom: 1px solid var(--line);
+    background: var(--surface);
+    overflow: hidden;
+  }
+
+  #edge {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+    opacity: .5;
+  }
+
+  .masthead-inner {
+    position: relative;
+    padding: 84px 0 64px;
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+  }
+
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: 11.5px;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--accent-ink);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .eyebrow::before {
+    content: "";
+    width: 26px;
+    height: 1px;
+    background: var(--accent);
+    flex: none;
+  }
+
+  h1 {
+    font-family: var(--mono);
+    font-size: clamp(34px, 6.2vw, 62px);
+    line-height: 1.02;
+    letter-spacing: -.035em;
+    font-weight: 600;
+    text-wrap: balance;
+    margin: 0;
+  }
+
+  .standfirst {
+    font-size: clamp(17px, 2.1vw, 20px);
+    line-height: 1.55;
+    color: var(--ink-soft);
+    max-width: 30ch;
+    text-wrap: balance;
+  }
+
+  .standfirst strong {
+    color: var(--ink);
+    font-weight: 600;
+  }
+
+  .status {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: .04em;
+    color: var(--ink-soft);
+    border: 1px solid var(--line);
+    background: var(--ground);
+    border-radius: 999px;
+    padding: 7px 14px 7px 11px;
+    align-self: flex-start;
+  }
+
+  .dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--signal);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--signal) 22%, transparent);
+    flex: none;
+  }
+
+  /* ── page grid ─────────────────────────────────────────────────────────── */
+  .layout {
+    display: grid;
+    grid-template-columns: 268px 1fr;
+    gap: 72px;
+    align-items: start;
+    padding: 64px 0 96px;
+  }
+
+  @media (max-width: 900px) {
+    .layout { grid-template-columns: 1fr; gap: 48px; padding-top: 44px; }
+  }
+
+  /* ── rail ──────────────────────────────────────────────────────────────── */
+  .rail {
+    position: sticky;
+    top: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  @media (max-width: 900px) {
+    .rail { position: static; }
+  }
+
+  .rail-block {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .rail-label {
+    font-family: var(--mono);
+    font-size: 10.5px;
+    letter-spacing: .17em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+  }
+
+  .rail-body {
+    font-size: 14.5px;
+    line-height: 1.55;
+    color: var(--ink-soft);
+  }
+
+  .rail-body strong { color: var(--ink); font-weight: 600; }
+
+  .rail-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    font-size: 14.5px;
+    color: var(--ink-soft);
+  }
+
+  .rail-list a {
+    text-decoration: none;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 1px;
+    transition: border-color .16s ease, color .16s ease;
+  }
+
+  .rail-list a:hover { color: var(--accent-ink); border-color: var(--accent); }
+
+  /* ── content sections ──────────────────────────────────────────────────── */
+  .main {
+    display: flex;
+    flex-direction: column;
+    gap: 72px;
+    min-width: 0;
+  }
+
+  .section-head {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--line);
+    margin-bottom: 28px;
+  }
+
+  .section-head h2 {
+    font-family: var(--mono);
+    font-size: 13px;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: var(--ink);
+    margin: 0;
+  }
+
+  .section-head .note {
+    font-size: 13px;
+    color: var(--ink-faint);
+    margin-left: auto;
+    text-align: right;
+  }
+
+  .lede {
+    font-size: 18px;
+    line-height: 1.68;
+    color: var(--ink-soft);
+    max-width: 66ch;
+  }
+
+  .lede + .lede { margin-top: 18px; }
+
+  .lede strong { color: var(--ink); font-weight: 600; }
+
+  /* ── systems ───────────────────────────────────────────────────────────── */
+  .systems {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(258px, 1fr));
+    gap: 18px;
+  }
+
+  .system {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: 22px 22px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 11px;
+    position: relative;
+  }
+
+  .system::before {
+    content: "";
+    position: absolute;
+    left: -1px; top: 18px; bottom: 18px;
+    width: 2px;
+    background: var(--accent);
+  }
+
+  .system h3 {
+    font-family: var(--mono);
+    font-size: 15px;
+    letter-spacing: -.01em;
+    font-weight: 600;
+    margin: 0;
+  }
+
+  .system p {
+    font-size: 14.5px;
+    line-height: 1.6;
+    color: var(--ink-soft);
+    margin: 0;
+  }
+
+  .system .chip {
+    font-family: var(--mono);
+    font-size: 10.5px;
+    letter-spacing: .13em;
+    text-transform: uppercase;
+    color: var(--signal);
+    margin-top: auto;
+    padding-top: 6px;
+  }
+
+  .system .scope {
+    font-family: var(--mono);
+    font-size: 11.5px;
+    color: var(--ink-faint);
+    letter-spacing: .02em;
+  }
+
+  /* ── timeline ──────────────────────────────────────────────────────────── */
+  .timeline {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .role {
+    display: grid;
+    grid-template-columns: 132px 1fr;
+    gap: 28px;
+    padding: 26px 0;
+    border-top: 1px solid var(--line-soft);
+  }
+
+  .role:first-child { border-top: none; padding-top: 4px; }
+
+  @media (max-width: 640px) {
+    .role { grid-template-columns: 1fr; gap: 10px; }
+  }
+
+  .years {
+    font-family: var(--mono);
+    font-size: 12.5px;
+    letter-spacing: .01em;
+    color: var(--ink-faint);
+    font-variant-numeric: tabular-nums;
+    padding-top: 3px;
+    line-height: 1.5;
+  }
+
+  .years .place {
+    display: block;
+    margin-top: 4px;
+    font-size: 11.5px;
+    letter-spacing: .05em;
+    text-transform: uppercase;
+  }
+
+  .role-body { min-width: 0; }
+
+  .role-title {
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: -.012em;
+    line-height: 1.35;
+    margin: 0 0 3px;
+    text-wrap: balance;
+  }
+
+  .role-org {
+    font-family: var(--mono);
+    font-size: 12.5px;
+    color: var(--accent-ink);
+    letter-spacing: .02em;
+    margin-bottom: 12px;
+  }
+
+  .role-body ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+    max-width: 62ch;
+  }
+
+  .role-body li {
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--ink-soft);
+    padding-left: 17px;
+    position: relative;
+  }
+
+  .role-body li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: .68em;
+    width: 6px;
+    height: 1px;
+    background: var(--ink-faint);
+  }
+
+  .role-body li strong { color: var(--ink); font-weight: 600; }
+
+  .role.feature .role-title { font-size: 21px; }
+
+  /* ── stack ─────────────────────────────────────────────────────────────── */
+  .stack {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+  }
+
+  .stack-row {
+    display: grid;
+    grid-template-columns: 132px 1fr;
+    gap: 28px;
+    align-items: start;
+  }
+
+  @media (max-width: 640px) {
+    .stack-row { grid-template-columns: 1fr; gap: 9px; }
+  }
+
+  .stack-label {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: .15em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    padding-top: 5px;
+  }
+
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .tag {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: .01em;
+    color: var(--ink-soft);
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    padding: 4px 9px;
+  }
+
+  .tag.hero {
+    color: var(--accent-ink);
+    border-color: color-mix(in srgb, var(--accent) 45%, var(--line));
+    background: var(--accent-wash);
+  }
+
+  /* ── closing ───────────────────────────────────────────────────────────── */
+  .closing {
+    border-top: 1px solid var(--line);
+    background: var(--surface);
+  }
+
+  .closing-inner {
+    padding: 60px 0 72px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .closing h2 {
+    font-family: var(--mono);
+    font-size: clamp(22px, 3.4vw, 30px);
+    letter-spacing: -.03em;
+    font-weight: 600;
+    margin: 0;
+    text-wrap: balance;
+  }
+
+  .closing p {
+    font-size: 16.5px;
+    color: var(--ink-soft);
+    max-width: 58ch;
+    margin: 0;
+  }
+
+  .contact-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 10px;
+  }
+
+  .contact-links a {
+    font-family: var(--mono);
+    font-size: 13px;
+    letter-spacing: .02em;
+    text-decoration: none;
+    border: 1px solid var(--line);
+    background: var(--ground);
+    border-radius: 2px;
+    padding: 10px 16px;
+    transition: border-color .16s ease, color .16s ease, background .16s ease;
+  }
+
+  .contact-links a:hover {
+    border-color: var(--accent);
+    color: var(--accent-ink);
+    background: var(--accent-wash);
+  }
+
+  .footnote {
+    font-family: var(--mono);
+    font-size: 11.5px;
+    letter-spacing: .05em;
+    color: var(--ink-faint);
+    padding: 22px 0 40px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { animation: none !important; transition: none !important; }
+  }
+</style>
+</head>
+<body>
+<header class="masthead">
+  <canvas id="edge" aria-hidden="true"></canvas>
+  <div class="shell masthead-inner">
+    <div class="eyebrow">Mobile platform engineering · 2010 — present</div>
+    <h1>Panatchai<br>Vathanasri</h1>
+    <p class="standfirst">I build the <strong>foundations</strong> other mobile engineers build on — architecture, delivery infrastructure, and the tooling in between.</p>
+    <div class="status"><span class="dot"></span>Available now · remote worldwide or relocation</div>
+  </div>
+</header>
+
+<div class="shell layout">
+
+  <aside class="rail">
+    <div class="rail-block">
+      <div class="rail-label">Based in</div>
+      <div class="rail-body">Phitsanulok, Thailand<br><span style="color:var(--ink-faint)">UTC+7</span></div>
+    </div>
+
+    <div class="rail-block">
+      <div class="rail-label">Work rights</div>
+      <div class="rail-body"><strong>Australian citizen</strong><br><strong>Thai citizen</strong></div>
+    </div>
+
+    <div class="rail-block">
+      <div class="rail-label">Open to</div>
+      <div class="rail-body">Remote worldwide · Singapore · APAC · United States · United Kingdom · Australia</div>
+    </div>
+
+    <div class="rail-block">
+      <div class="rail-label">Roles</div>
+      <div class="rail-body">Engineering Manager · Head of Mobile · Staff / Principal Engineer · Mobile Platform &amp; Architecture</div>
+    </div>
+
+    <div class="rail-block">
+      <div class="rail-label">Languages</div>
+      <div class="rail-body">English <span style="color:var(--ink-faint)">— fluent</span> · Thai <span style="color:var(--ink-faint)">— native</span></div>
+    </div>
+
+    <div class="rail-block">
+      <div class="rail-label">Contact</div>
+      <ul class="rail-list">
+        <li><a href="mailto:panatchai.v@gmail.com">panatchai.v@gmail.com</a></li>
+        <li><a href="https://www.linkedin.com/in/panatchai-vathanasri">linkedin.com/in/panatchai-vathanasri</a></li>
+      </ul>
+    </div>
+  </aside>
+
+  <main class="main">
+
+    <section>
+      <div class="section-head"><h2>Position</h2></div>
+      <p class="lede">Fifteen years of mobile engineering across Australia and Southeast Asia. The last four at <strong>Foris Limited (Crypto.com)</strong>, working across the platform, React Native foundation, app performance and SRE teams at once, reporting directly to the VP of Engineering.</p>
+      <p class="lede">My focus is the work that unblocks a whole organisation: taking on the problems that have proven difficult to solve, delivering them, and then turning each solution into something the wider engineering team can adopt with ease.</p>
+    </section>
+
+    <section>
+      <div class="section-head">
+        <h2>Systems I own</h2>
+        <span class="note">built end to end — AWS infrastructure → admin console → mobile SDK</span>
+      </div>
+      <div class="systems">
+
+        <article class="system">
+          <h3>React Native OTA</h3>
+          <div class="scope">Over-the-air bundle delivery</div>
+          <p>Ships JavaScript updates to production without waiting on App Store or Play Store review. An earlier attempt had never reached a working state; I took ownership and delivered it, then helped the x-app team stand up their own OTA on the shared repository.</p>
+          <div class="chip">In production · main &amp; x-app</div>
+        </article>
+
+        <article class="system">
+          <h3>Mobile CDN</h3>
+          <div class="scope">Global asset delivery</div>
+          <p>Images, fonts, video, HTML and arbitrary assets served worldwide to mobile clients, with an internal admin console, client SDKs and code-generation tooling. Built solo, AI-assisted with Claude Code, across infrastructure, backend and client.</p>
+          <div class="chip">In production</div>
+        </article>
+
+        <article class="system">
+          <h3>Mobile observability</h3>
+          <div class="scope">Performance instrumentation</div>
+          <p>Set up and developed the performance tracking foundation on Datadog RUM and Sumo Logic — the instrumentation used to find and fix regressions.</p>
+          <div class="chip">In production</div>
+        </article>
+
+      </div>
+    </section>
+
+    <section>
+      <div class="section-head">
+        <h2>Track record</h2>
+        <span class="note">reverse chronological</span>
+      </div>
+      <div class="timeline">
+
+        <article class="role feature">
+          <div class="years">2022 — 2026<span class="place">Remote</span></div>
+          <div class="role-body">
+            <h3 class="role-title">Senior Android Engineer — Mobile Platform &amp; React Native Foundation</h3>
+            <div class="role-org">Foris Limited (Crypto.com)</div>
+            <ul>
+              <li>As the sole frontend engineer, worked with a team of backend engineers on the confidential proof-of-concept for running React Native inside the large legacy native codebase — getting the difficult brownfield integration working. It became the <strong>groundwork for the company's migration to React Native</strong>.</li>
+              <li>Later joined the foundation team, working closely with Callstack team members on the various projects and components that defined the <strong>architecture and practices</strong> that followed.</li>
+              <li>Defined and rolled out the <strong>application architecture</strong> — Clean Architecture and layered design — plus engineering guidelines adopted across the Android and iOS engineers; some Android-specific, some shared across both platforms.</li>
+              <li>Built internal developer infrastructure and tooling, and ran the education sessions that got the standards actually used rather than merely documented.</li>
+              <li>Owned the <strong>OTA</strong> and <strong>CDN</strong> systems end to end: CloudFront, S3, Lambda@Edge, EKS, DynamoDB and Terraform through to the client libraries that make adoption a one-liner for product teams.</li>
+              <li>As part of the <strong>SRE</strong> function, built CI/CD pipelines that packaged services as Docker images and deployed them to EKS, and authored the Terraform and network configuration applied by the infrastructure team.</li>
+              <li>Trusted as an early member on confidential, high-stakes projects before they were announced internally or publicly.</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="role">
+          <div class="years">2019 — 2022<span class="place">Melbourne</span></div>
+          <div class="role-body">
+            <h3 class="role-title">Senior Android Engineer</h3>
+            <div class="role-org">Concentrix Tigerspike</div>
+            <ul>
+              <li>Led Android architecture and delivery on client engagements at a global digital product consultancy, from discovery through release.</li>
+              <li>Set code quality, testing and review standards across project teams; mentored engineers and served as Android technical point of contact for clients.</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="role">
+          <div class="years">2018 — 2019<span class="place">Bangkok</span></div>
+          <div class="role-body">
+            <h3 class="role-title">Lead Software Engineer</h3>
+            <div class="role-org">PropertyGuru</div>
+            <ul>
+              <li>Led technical direction, architecture and delivery for mobile at Southeast Asia's largest property marketplace.</li>
+              <li>Drove codebase and release-process modernisation; owned code review, mentoring and hiring support.</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="role">
+          <div class="years">2016 — 2018<span class="place">Bangkok</span></div>
+          <div class="role-body">
+            <h3 class="role-title">Android Manager</h3>
+            <div class="role-org">11street (Thailand)</div>
+            <ul>
+              <li>Managed Android engineering for a major regional eCommerce marketplace — app delivery, mobile APIs and web services (Spring), and mobile marketing campaigns.</li>
+              <li>Built and supervised the Android team; shipped the 11street Android application and its feature set.</li>
+              <li>Improved UI/UX, application performance and the mobile backend system.</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="role">
+          <div class="years">2016<span class="place">Bangkok</span></div>
+          <div class="role-body">
+            <h3 class="role-title">Senior Android Developer · Android Developer</h3>
+            <div class="role-org">Kinof Innovative · Appsynth</div>
+            <ul>
+              <li>Shipped the <strong>7-Eleven Thailand</strong> Android application; developed features and maintained code for <strong>LINE MAN</strong>; diagnosed and fixed performance issues for Sbito.</li>
+              <li>Built the Chic-Travel Android application and supervised a junior team.</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="role">
+          <div class="years">2011 — 2015<span class="place">Australia</span></div>
+          <div class="role-body">
+            <h3 class="role-title">Software Developer</h3>
+            <div class="role-org">Stoddart Group</div>
+            <ul>
+              <li>Replaced a slow manual business process with an enterprise system and companion Android apps — significantly reducing manpower and operating cost while raising productivity.</li>
+              <li>Built a versatile web-service-backed reporting system accessible from any device; designed and maintained project databases.</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="role">
+          <div class="years">2010<span class="place">Brisbane</span></div>
+          <div class="role-body">
+            <h3 class="role-title">Research Assistant</h3>
+            <div class="role-org">Queensland University of Technology</div>
+            <ul>
+              <li>Built complex .NET data mining and data entry applications and reporting for a city planning research project, substantially increasing data acquisition productivity.</li>
+            </ul>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <section>
+      <div class="section-head"><h2>Stack</h2></div>
+      <div class="stack">
+
+        <div class="stack-row">
+          <div class="stack-label">Mobile</div>
+          <div class="tags">
+            <span class="tag hero">React Native</span>
+            <span class="tag hero">TypeScript</span>
+            <span class="tag">Expo</span>
+            <span class="tag">TurboModules</span>
+            <span class="tag">Reanimated</span>
+            <span class="tag">Brownfield &amp; greenfield RN</span>
+            <span class="tag hero">Android</span>
+            <span class="tag">Kotlin</span>
+            <span class="tag">Java</span>
+            <span class="tag">Jetpack Compose</span>
+          </div>
+        </div>
+
+        <div class="stack-row">
+          <div class="stack-label">Architecture</div>
+          <div class="tags">
+            <span class="tag hero">Clean Architecture</span>
+            <span class="tag">Modularisation</span>
+            <span class="tag">Monorepo</span>
+            <span class="tag">SDK &amp; library design</span>
+            <span class="tag">Developer experience</span>
+          </div>
+        </div>
+
+        <div class="stack-row">
+          <div class="stack-label">Infrastructure</div>
+          <div class="tags">
+            <span class="tag hero">AWS</span>
+            <span class="tag">CloudFront</span>
+            <span class="tag">S3</span>
+            <span class="tag">Lambda / Lambda@Edge</span>
+            <span class="tag">EKS</span>
+            <span class="tag">Docker</span>
+            <span class="tag">DynamoDB</span>
+            <span class="tag">Terraform</span>
+            <span class="tag">Okta</span>
+          </div>
+        </div>
+
+        <div class="stack-row">
+          <div class="stack-label">Delivery &amp; SRE</div>
+          <div class="tags">
+            <span class="tag">CI/CD</span>
+            <span class="tag">GitHub Actions</span>
+            <span class="tag">Fastlane</span>
+            <span class="tag">Bitrise</span>
+            <span class="tag">Detox</span>
+            <span class="tag">Maestro</span>
+            <span class="tag">TDD / BDD</span>
+          </div>
+        </div>
+
+        <div class="stack-row">
+          <div class="stack-label">Observability</div>
+          <div class="tags">
+            <span class="tag">Datadog RUM</span>
+            <span class="tag">Sumo Logic</span>
+            <span class="tag">Mobile performance instrumentation</span>
+          </div>
+        </div>
+
+        <div class="stack-row">
+          <div class="stack-label">AI-assisted</div>
+          <div class="tags">
+            <span class="tag hero">Claude Code</span>
+            <span class="tag">Agentic development workflows</span>
+            <span class="tag">Code generation tooling</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <section>
+      <div class="section-head"><h2>Education</h2></div>
+      <div class="timeline">
+        <article class="role">
+          <div class="years">2007 — 2009<span class="place">Brisbane</span></div>
+          <div class="role-body">
+            <h3 class="role-title">Master of Information Technology, Software Development</h3>
+            <div class="role-org">Queensland University of Technology</div>
+            <ul>
+              <li>Dean's List Award · Australia Post Scholarship Award</li>
+            </ul>
+          </div>
+        </article>
+        <article class="role">
+          <div class="years">2002 — 2006<span class="place">Bangkok</span></div>
+          <div class="role-body">
+            <h3 class="role-title">Bachelor of Engineering, Computer Engineering</h3>
+            <div class="role-org">Mahidol University</div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<section class="closing">
+  <div class="shell closing-inner">
+    <h2>Looking for the next foundation to build.</h2>
+    <p>Engineering management, staff-level platform work, or mobile architecture — for a team that ships to real users at scale. Remote anywhere, or relocating for the right role.</p>
+    <div class="contact-links">
+      <a href="mailto:panatchai.v@gmail.com">panatchai.v@gmail.com</a>
+      <a href="https://www.linkedin.com/in/panatchai-vathanasri">linkedin.com/in/panatchai-vathanasri</a>
+    </div>
+  </div>
+</section>
+
+<div class="shell footnote">Panatchai Vathanasri · Mobile platform engineering · Updated July 2026</div>
+
+<script>
+  (function () {
+    var canvas = document.getElementById('edge');
+    if (!canvas || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      if (canvas) canvas.style.display = 'none';
+      return;
+    }
+
+    var ctx = canvas.getContext('2d');
+    var w = 0, h = 0, dpr = Math.min(window.devicePixelRatio || 1, 2);
+    var GAP = 26;
+    var origins = [];
+    var start = null;
+
+    function accent() {
+      return getComputedStyle(document.documentElement).getPropertyValue('--accent').trim() || '#B7791F';
+    }
+
+    function hexToRgb(hex) {
+      var m = hex.replace('#', '');
+      if (m.length === 3) m = m[0] + m[0] + m[1] + m[1] + m[2] + m[2];
+      var n = parseInt(m, 16);
+      return [(n >> 16) & 255, (n >> 8) & 255, n & 255];
+    }
+
+    function resize() {
+      var r = canvas.getBoundingClientRect();
+      w = r.width; h = r.height;
+      canvas.width = Math.round(w * dpr);
+      canvas.height = Math.round(h * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      // Origins sit off the reading column so pulses wash the right-hand margin.
+      origins = [
+        { x: w * 0.82, y: h * 0.24, phase: 0 },
+        { x: w * 0.62, y: h * 0.86, phase: 3.1 },
+        { x: w * 0.97, y: h * 0.66, phase: 5.6 }
+      ];
+    }
+
+    function frame(t) {
+      if (start === null) start = t;
+      var time = (t - start) / 1000;
+      ctx.clearRect(0, 0, w, h);
+
+      var rgb = hexToRgb(accent());
+      var maxR = Math.max(w, h) * 0.75;
+
+      for (var y = GAP / 2; y < h; y += GAP) {
+        for (var x = GAP / 2; x < w; x += GAP) {
+          var a = 0;
+          for (var i = 0; i < origins.length; i++) {
+            var o = origins[i];
+            var d = Math.hypot(x - o.x, y - o.y);
+            // Each origin emits an expanding ring every 7s; dots light as it passes.
+            var ring = ((time * 0.16 + o.phase) % 7) / 7 * maxR;
+            var band = 1 - Math.min(Math.abs(d - ring) / 62, 1);
+            a += band * band * (1 - d / maxR);
+          }
+          if (a <= 0.008) continue;
+          ctx.fillStyle = 'rgba(' + rgb[0] + ',' + rgb[1] + ',' + rgb[2] + ',' + Math.min(a, 0.5).toFixed(3) + ')';
+          ctx.fillRect(x, y, 1.6, 1.6);
+        }
+      }
+      requestAnimationFrame(frame);
+    }
+
+    resize();
+    window.addEventListener('resize', resize);
+    requestAnimationFrame(frame);
+  })();
+</script>
+
+</body>
+</html>
