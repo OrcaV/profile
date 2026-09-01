@@ -626,8 +626,9 @@
 
     <section>
       <div class="section-head"><h2>Position</h2></div>
-      <p class="lede">Fifteen years of mobile engineering across Australia and Southeast Asia. The last four at <strong>Foris Limited (Crypto.com)</strong>, working across the platform, React Native foundation, app performance and SRE teams at once.</p>
+      <p class="lede">Fifteen years of mobile engineering across Australia and Southeast Asia. The last four at <strong>Foris Limited (Crypto.com)</strong> as the <strong>founding engineer of the Mobile Foundation team</strong>, setting mobile technical direction across the platform, React Native foundation, app performance and SRE teams at once.</p>
       <p class="lede">My focus is the work that unblocks a whole organisation: taking on the problems that have proven difficult to solve, delivering them, and then turning each solution into something the wider engineering team can adopt with ease.</p>
+      <p class="lede">I set direction without positional authority — through architecture, reference implementations and training, until adoption is real. For the last three years no one assigned me work; I set the roadmap directly against executive priorities and what the teams needed.</p>
     </section>
 
     <section>
@@ -654,7 +655,7 @@
         <article class="system">
           <h3>Mobile observability</h3>
           <div class="scope">Performance instrumentation</div>
-          <p>Set up the performance tracking foundation on Datadog RUM and Sumo Logic, and defined mobile performance SLIs/SLOs — app start, screen load times — with the dashboards and alerting that monitor them.</p>
+          <p>The internal framework product teams instrument against, wrapping Datadog, Bugsnag, SonarQube and related tooling behind one stable API instead of vendor SDKs. Includes the backend PII filtering system on Cloudflare Workers, and the mobile performance SLIs/SLOs — app start, screen load — with the dashboards and alerting that monitor them.</p>
           <div class="chip">In production</div>
         </article>
 
@@ -671,14 +672,14 @@
         <article class="role feature">
           <div class="years">2022 — 2026<span class="place">Remote</span></div>
           <div class="role-body">
-            <h3 class="role-title">Senior Android Engineer — Mobile Platform, React Native Foundation &amp; SRE</h3>
-            <div class="role-org">Foris Limited (Crypto.com)</div>
+            <h3 class="role-title">Mobile Platform &amp; React Native Foundation — Founding Engineer</h3>
+            <div class="role-org">Foris Limited (Crypto.com) <span style="color:var(--ink-faint)">· title of record: Senior Android Engineer · individual contributor, no direct reports</span></div>
             <ul>
-              <li>Sole frontend engineer on the confidential proof-of-concept that put React Native inside a large legacy native codebase — the brownfield integration nobody had made work. Partnered with a small backend team to land it, and built the <strong>complex build system and CI/CD</strong> that made it usable day to day: reproducible builds, fast feedback, and a developer experience that turned a fragile integration into something teams could ship on. It became the <strong>groundwork for the company's migration to React Native</strong>.</li>
-              <li>Carried that into the <strong>React Native foundation team</strong>, building core projects and shared components alongside engineers from <strong>Callstack</strong> — the work that set the <strong>architecture and practices</strong> every product team inherited.</li>
-              <li>Defined and rolled out the <strong>application architecture</strong> — Clean Architecture and layered design — plus engineering guidelines adopted across the Android and iOS engineers; some Android-specific, some shared across both platforms.</li>
-              <li>Built internal developer infrastructure and tooling, and ran the education sessions that got the standards actually used rather than merely documented.</li>
-              <li>Owned the <strong>OTA</strong> and <strong>CDN</strong> systems end to end: CloudFront, S3, Lambda@Edge, EKS, DynamoDB and Terraform through to the client libraries that make adoption a one-liner for product teams.</li>
+              <li>Designed the migration from a <strong>monolithic application to a modular architecture</strong> once the engineering group had grown into the hundreds and the monolith could no longer absorb it. Presented it to mobile engineering and it was <strong>adopted as the group's direction</strong>. The teams executed it; I owned the design, the reference implementations they built against, and the training that carried it to real adoption on both platforms.</li>
+              <li>Proposed <strong>brownfield-first</strong> over the planned native-to-greenfield rewrite, so the cross-platform move could proceed without putting a live business at risk. That sequencing became the company's approach.</li>
+              <li>Joined a confidential cross-platform program that had stalled for months on brownfield integration, and built the proof of concept that <strong>replaced a live native screen with a React Native implementation inside the shipping app</strong>. The program restarted, and the <strong>Mobile Foundation team was formed around it</strong> — founding member, and core engineer since.</li>
+              <li>Set the foundational technical decisions the company still builds on: <strong>bare React Native over Expo</strong>, monorepo structure, brownfield native/RN integration, CI/CD for hybrid builds, TurboModules and native module boundaries, TypeScript conventions, NativeWind styling and the Jest and end-to-end testing stack — much of it alongside engineers from <strong>Callstack</strong>.</li>
+              <li>Owned the <strong>OTA</strong>, <strong>CDN</strong> and <strong>observability</strong> systems end to end: CloudFront, S3, Lambda@Edge, EKS, DynamoDB, Terraform and Cloudflare Workers through to the client libraries that make adoption a one-liner for product teams.</li>
               <li>As part of the <strong>SRE</strong> function, built CI/CD pipelines that packaged services as Docker images and deployed them to EKS and Lambda@Edge, and authored the Terraform and network configuration applied by the infrastructure team.</li>
               <li>Trusted as an early member on confidential, high-stakes projects before they were announced internally or publicly.</li>
             </ul>
@@ -772,6 +773,7 @@
             <span class="tag">Expo</span>
             <span class="tag">TurboModules</span>
             <span class="tag">Reanimated</span>
+        <span class="tag">NativeWind</span>
             <span class="tag">Brownfield &amp; greenfield RN</span>
             <span class="tag hero">Android</span>
             <span class="tag">Kotlin</span>
@@ -803,6 +805,7 @@
             <span class="tag">DynamoDB</span>
             <span class="tag">Terraform</span>
             <span class="tag">Okta</span>
+        <span class="tag">Cloudflare Workers</span>
           </div>
         </div>
 
@@ -813,7 +816,8 @@
             <span class="tag">GitHub Actions</span>
             <span class="tag">Fastlane</span>
             <span class="tag">Bitrise</span>
-            <span class="tag">Detox</span>
+            <span class="tag">Jest</span>
+        <span class="tag">Detox</span>
             <span class="tag">Maestro</span>
             <span class="tag">TDD / BDD</span>
           </div>
@@ -823,7 +827,9 @@
           <div class="stack-label">Observability</div>
           <div class="tags">
             <span class="tag">Datadog RUM</span>
-            <span class="tag">Sumo Logic</span>
+            <span class="tag">Bugsnag</span>
+        <span class="tag">Sumo Logic</span>
+        <span class="tag">SonarQube</span>
             <span class="tag">Mobile performance instrumentation</span>
             <span class="tag">SLIs / SLOs</span>
           </div>
