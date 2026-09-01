@@ -641,21 +641,21 @@
         <article class="system">
           <h3>React Native OTA</h3>
           <div class="scope">Over-the-air bundle delivery</div>
-          <p>Ships JavaScript updates to production without waiting on App Store or Play Store review. An earlier attempt had never reached a working state; I took ownership and delivered it, then helped the exchange team set up their own OTA on the shared repository.</p>
+          <p>Takes store review off the critical path for the 8 feature teams shipping on it. An earlier attempt had never reached a working state; I took ownership and delivered it, then extended the shared system to a second production app and guided the exchange team's platform and infrastructure engineers through their setup.</p>
           <div class="chip">In production · main &amp; exchange</div>
         </article>
 
         <article class="system">
           <h3>Mobile CDN</h3>
           <div class="scope">Global asset delivery</div>
-          <p>Images, fonts, video, HTML and arbitrary assets served worldwide to mobile clients, with an internal admin console, client SDKs and code-generation tooling. Built solo, AI-assisted with Claude Code, across infrastructure, backend and client.</p>
+          <p>Images, fonts, video, HTML and arbitrary assets served worldwide to mobile clients, moving them out of the app bundle for a product with 30 million monthly actives. Sized and verified against traffic on the order of millions of requests a day, most served from CloudFront cache. Built solo, AI-assisted with Claude Code, across infrastructure, backend and client.</p>
           <div class="chip">In production</div>
         </article>
 
         <article class="system">
           <h3>Mobile observability</h3>
           <div class="scope">Performance instrumentation</div>
-          <p>The internal framework product teams instrument against, wrapping Datadog, Bugsnag, SonarQube and related tooling behind one stable API instead of vendor SDKs. Includes the backend PII filtering system on Cloudflare Workers, and the mobile performance SLIs/SLOs — app start, screen load — with the dashboards and alerting that monitor them.</p>
+          <p>The internal framework product teams instrument against, wrapping Datadog, Bugsnag, SonarQube and related tooling behind one stable API instead of vendor SDKs. Includes the backend PII filtering system on Cloudflare Workers, and the mobile performance SLIs/SLOs &mdash; app start cut from a 7&ndash;8 second average to an under-5-second SLO &mdash; with the dashboards and the alerting that routes breaches into team Slack channels.</p>
           <div class="chip">In production</div>
         </article>
 
@@ -675,12 +675,14 @@
             <h3 class="role-title">Mobile Platform &amp; React Native Foundation — Founding Engineer</h3>
             <div class="role-org">Foris Limited (Crypto.com) <span style="color:var(--ink-faint)">· title of record: Senior Android Engineer · individual contributor, no direct reports</span></div>
             <ul>
-              <li>Designed the migration from a <strong>monolithic application to a modular architecture</strong> once the engineering group had grown into the hundreds and the monolith could no longer absorb it. Presented it to mobile engineering and it was <strong>adopted as the group's direction</strong>. The teams executed it; I owned the design, the reference implementations they built against, and the training that carried it to real adoption on both platforms.</li>
+              <li>Designed the migration from a <strong>monolithic application to a modular architecture</strong> &mdash; roughly <strong>70&ndash;80 modules</strong> on the company's largest app &mdash; once the engineering group had grown into the hundreds and the monolith could no longer absorb it. Defined what each module is and does, the migration plan, and the Clean Architecture and SOLID practice underneath it. Presented it to mobile engineering and it was <strong>adopted as the group's direction</strong>.</li>
+              <li>Migrated the <strong>core modules</strong> &mdash; networking, storage, encryption, authentication &mdash; with the other platform engineers, and built a worked migration on a real feature module as the reference. Ran the training and per-team consulting that took all <strong>8 feature teams</strong> through their own. Every team completed the migration.</li>
               <li>Proposed <strong>brownfield-first</strong> over the planned native-to-greenfield rewrite, so the cross-platform move could proceed without putting a live business at risk. That sequencing became the company's approach.</li>
               <li>Joined a confidential cross-platform program that had stalled for months on brownfield integration, and built the proof of concept that <strong>replaced a live native screen with a React Native implementation inside the shipping app</strong>. The program restarted, and the <strong>Mobile Foundation team was formed around it</strong> — founding member, and core engineer since.</li>
               <li>Set the foundational technical decisions the company still builds on: <strong>bare React Native over Expo</strong>, monorepo structure, brownfield native/RN integration, CI/CD for hybrid builds, TurboModules and native module boundaries, TypeScript conventions, NativeWind styling and the Jest and end-to-end testing stack — much of it alongside engineers from <strong>Callstack</strong>.</li>
               <li>Owned the <strong>OTA</strong>, <strong>CDN</strong> and <strong>observability</strong> systems end to end: CloudFront, S3, Lambda@Edge, EKS, DynamoDB, Terraform and Cloudflare Workers through to the client libraries that make adoption a one-liner for product teams.</li>
               <li>As part of the <strong>SRE</strong> function, built CI/CD pipelines that packaged services as Docker images and deployed them to EKS and Lambda@Edge, and authored the Terraform and network configuration applied by the infrastructure team.</li>
+              <li>Influence ran past the main app: advised the <strong>exchange app</strong> platform team through their own React Native adoption and setup, and their infrastructure team through the OTA configuration that mirrored ours.</li>
               <li>Trusted as an early member on confidential, high-stakes projects before they were announced internally or publicly.</li>
             </ul>
           </div>
